@@ -1,0 +1,235 @@
+import turtle
+import math
+# import numpy as np
+
+wn = turtle.Screen()
+wn.setup(500, 400)
+
+# un-comment this line to register the image for use in trinket
+#wn.addshape("amongus.png")
+
+drawSpeed = 0 #int(input("How fast do you want to render the artwork? "))
+awalls = [
+    [ 0 , 0 , 0 ,"lightgray"],
+    [ 0 , 100 , 0 ,""],
+    [ 0 , 0 , 0 ,""],
+    [ 100 , 100 , 0 ,""],
+    [ 100 , 0 , 0 ,""],
+    [0,100,0,""]
+]
+# TODO: determine angle for each wall to get proper bounce (perpendicular to center of angle)
+walls = [
+    [ 217 , 116 , 230 ,"lightgray"],
+    [ 140 , 21 , 0 ,""],
+    [ 117 , 125 , 0 ,""],
+    [ 235 , 86 , 0 ,""],
+    [ 140 , 21 , 0 ,""],    
+    [ 76 , 80 , 0 ,""],
+    [ 187 , 21 , 0 ,""],
+    [ 205 , 122 , 0 ,"red"],
+    [ 52 , 162 , 0 ,""],
+    [ 99 , 122 , 0 ,""],
+    [ 107 , 187 , 0 ,""],
+    [ 148 , 128 , 0 ,""],
+    [ 168 , 171 , 0 ,""],
+    [ 33 , 133 , 0 ,""],
+    [ 78 , 97 , 0 ,""],
+    [ 14 , 77 , 0 ,""],
+    [ 81 , 53 , 0 ,""],
+    [ 7 , 23 , 0 ,""],
+    [ 92 , 37 , 0 ,""],
+    [ 6 , -32 , 0 ,""],
+    [ 216 , -70 , 0 ,""],
+    [ 10 , -98 , 0 ,""],
+    [ 210 , -113 , 0 ,""],
+    [ 137 , -138 , 0 ,""],
+    [ 204 , -147 , 0 ,""],
+    [ 142 , -180 , 0 ,""],
+    [ 197 , -178 , 0 ,""],
+    [ 139 , -160 , 0 ,""],
+    [ 213 , -91 , 0 ,""],
+    [ 7 , -66 , 0 ,""],
+    [ 219 , -27 , 0 ,""],
+    [ 6 , -5 , 0 ,""],
+    [ 221 , 9 , 0 ,""],
+    [ 14 , -131 , 0 ,""],
+    [ 97 , -150 , 0 ,""],
+    [ 22 , -181 , 0 ,""],
+    [ 95 , -181 , 0 ,""],
+    [ 10 , -110 , 0 ,"maroon"],
+    [ -42 , -111 , 0 ,""],
+    [ 9 , -87 , 0 ,""],
+    [ -52 , -82 , 0 ,""],
+    [ 7 , -60 , 0 ,""],
+    [ -54 , -50 , 0 ,""],
+    [ 5 , -38 , 0 ,""],
+    [ -55 , -22 , 0 ,""],
+    [ 6 , 5 , 0 ,""],
+    [ -53 , 15 , 0 ,""],
+    [ 9 , 39 , 0 ,""],
+    [ -40 , 60 , 0 ,""],
+    [ 9 , 76 , 0 ,""]
+  ]
+
+numberOfVisibleWalls = 2
+
+xIdx = 0
+yIdx = 1
+angleIdx = 2
+colorIdx = 3
+turtleIdx = 4
+
+def drawWall(idx):
+  global walls
+  global drawSpeed
+
+  wall = walls[idx]
+  
+  if len(wall) <= turtleIdx:
+    mason = turtle.Turtle()
+    mason.hideturtle()
+    mason.speed(drawSpeed)
+    mason.pensize(4)
+    wall.append(mason)
+  else:
+    mason = wall[turtleIdx]
+    
+  mason.penup()
+  mason.goto(wall[xIdx], wall[yIdx])
+  mason.setheading(wall[angleIdx])
+  
+  mason.backward(25)
+  mason.pendown()
+  mason.forward(50)
+  mason.backward(25)
+
+
+def breakWall(idx):
+  global walls
+  
+  wall = walls[idx]
+  mason = wall.pop(1)
+  
+  # remove intact wall
+  mason.clear()
+  # TODO: draw broken wall
+  mason.penup()
+  mason.setheading(wall[angleIdx])
+  # remove broken wall
+  mason.clear()
+    
+
+def collideWithWall(idx):
+  global walls
+  
+  breakWall(idx)
+  if idx < len(walls) - numberOfVisibleWalls:
+    drawWall(idx + numberOfVisibleWalls)
+
+def xangle_between(p1, p2):
+    ang1 = math.atan2(*p1[::-1])
+    ang2 = math.atan2(*p2[::-1])
+    return math.degrees((ang1 - ang2) % (2 * math.pi))
+
+def angle_between(p1, p2):
+    return (math.degrees(math.atan2((p2[1]-p1[1]), (p2[0]-p1[0]))) + 360) % 360
+
+def calc_angle(pointA, pointB):
+    """
+    Calculates the bearing between two points.
+    The formulae used is the following:
+        θ = atan2(sin(Δlong).cos(lat2),
+                  cos(lat1).sin(lat2) − sin(lat1).cos(lat2).cos(Δlong))
+    :Parameters:
+      - `pointA: The tuple representing the latitude/longitude for the
+        first point. Latitude and longitude must be in decimal degrees
+      - `pointB: The tuple representing the latitude/longitude for the
+        second point. Latitude and longitude must be in decimal degrees
+    :Returns:
+      The bearing in degrees
+    :Returns Type:
+      float
+    """
+    if (type(pointA) != tuple) or (type(pointB) != tuple):
+        raise TypeError("Only tuples are supported as arguments")
+
+    lat1 = math.radians(pointA[0])
+    lat2 = math.radians(pointB[0])
+
+    diffLong = math.radians(pointB[1] - pointA[1])
+
+    x = math.sin(diffLong) * math.cos(lat2)
+    y = math.cos(lat1) * math.sin(lat2) - (math.sin(lat1)
+            * math.cos(lat2) * math.cos(diffLong))
+
+    initial_bearing = math.atan2(x, y)
+
+    # Now we have the initial bearing but math.atan2 return values
+    # from -180° to + 180° which is not what we want for a compass bearing
+    # The solution is to normalize the initial bearing as shown below
+    initial_bearing = math.degrees(initial_bearing)
+    compass_bearing = (initial_bearing + 360) % 360
+
+    return compass_bearing
+
+def drawGrid():
+  grid = turtle.Turtle()
+  grid.speed(0)
+  
+  x = -200
+  while x < 200:
+    if x == 0:
+      grid.color("blue")
+      
+    grid.penup()
+    grid.goto(x,-200)
+    grid.pendown()
+    grid.goto(x,200)
+    x += 10
+
+# TODO: draw first numberOfVisibleWalls walls
+
+# TODO: set initial game state : starting position, heading, initial color, etc.
+
+# TODO: run game loop
+
+
+# ---- this code just draws lines between the points so I can make get the picture correct.
+needle = turtle.Turtle()
+needle.penup()
+needle.speed(drawSpeed)
+heading = walls[0][angleIdx]
+wallIdx = 0
+while wallIdx < len(walls):
+  wall = walls[wallIdx]
+
+  # I have been using this code block to make calculated adjustments to the coordinates, then copy/pasting the output
+  # to correct the array above. Things like correct positioning on canvas
+  x = wall[xIdx] #  + 100
+  y = wall[yIdx] # - 200
+  #print("[",x,",",y,",",wall[angleIdx],",\""+wall[colorIdx]+"\"],")
+  # needle.goto(x, y)
+  # print("[",x,",",y,",",needle.heading(),",\""+wall[colorIdx]+"\"],")
+  if wallIdx + 1 < len(walls):
+    new_heading = angle_between((wall[xIdx], wall[yIdx]),(walls[wallIdx+1][xIdx],walls[wallIdx+1][yIdx]))
+    wall_angle = ((needle.heading() + new_heading)/2 + 360) % 360
+  else:
+    new_heading = 0
+  print("[",x,",",y,",",wall_angle,",\""+wall[colorIdx]+"\"],")
+  
+  needle.goto(wall[xIdx], wall[yIdx])
+  needle.setheading(new_heading)
+  if wall[colorIdx] != "":
+    needle.pencolor(wall[colorIdx])
+  
+  needle.pendown()
+  wallIdx += 1
+
+# This will draw the imposter on top of the string art
+# imposter = turtle.Turtle()
+# imposter.speed(0)
+# imposter.setheading(90)
+# imposter.goto(100, 0)
+# imposter.shape("amongus.png")
+
+wn.mainloop()
