@@ -4,10 +4,10 @@ from data import themes, build_wall_data
 from drawing_functions import xIdx, yIdx, angleIdx, colorIdx, turtleIdx, init_wall_turtles, draw_wall, remove_wall, break_wall, draw_boundaries, boundary_size
 
 wn = turtle.Screen()
-wn.addshape("amongus.gif")
-wn.addshape("kinda_sus.gif")
-wn.addshape("broken_wall.gif")
-wn.addshape("loading.gif")
+wn.addshape("img/amongus.gif")
+wn.addshape("img/kinda_sus.gif")
+wn.addshape("img/broken_wall.gif")
+wn.addshape("img/loading.gif")
 
 wn.setup(boundary_size + 100, boundary_size + 100)
 
@@ -41,7 +41,7 @@ def collide_with_wall(idx):
 def change_heading(heading, angle_of_obstacle):
     return (2 * angle_of_obstacle - heading + 360) % 360
 
-wn.bgpic("loading.gif")
+wn.bgpic("img/loading.gif")
 init_wall_turtles(walls)
 wn.bgpic("")
 
@@ -91,12 +91,12 @@ while (nextWallIndex < len(walls)):
 remove_wall(walls[len(walls)-1])
 
 # random chance of having a suspicious character
-if random.randint(1, 10) > 2:
+if random.randint(1,50) % 2 == 0:
     traveller.setheading(150)
     traveller.penup()
     traveller.turtlesize(1)
     traveller.speed(1)
-    traveller.shape("kinda_sus.gif")
+    traveller.shape("img/kinda_sus.gif")
     traveller.forward(150)
 else:
     traveller.hideturtle()
@@ -109,7 +109,7 @@ if selectedTheme == 0:
     imposter.speed(0)
     imposter.setheading(90)
     imposter.goto(100, 0)
-    imposter.shape("amongus.gif")
+    imposter.shape("img/amongus.gif")
     imposter.showturtle()
 
 wn.mainloop()

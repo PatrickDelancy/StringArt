@@ -53,7 +53,7 @@ def draw_wall(wall):
 def break_wall(wall):
   mason = wall[turtleIdx]
   mason.clear()
-  mason.shape("broken_wall.gif")
+  mason.shape("img/broken_wall.gif")
   mason.showturtle()
 
 def remove_wall(wall):
