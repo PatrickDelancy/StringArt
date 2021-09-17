@@ -10,62 +10,64 @@ drawSpeed = 0 #int(input("How fast do you want to render the artwork? "))
 
 # TODO: determine angle for each wall to get proper bounce (perpendicular to center of angle)
 walls = [
-    [ 217 , 116 , 0 ,"lightgray"],
-    [ 140 , 21 , 0 ,""],
-    [ 117 , 125 , 0 ,""],
-    [ 235 , 86 , 0 ,""],
-    [ 103 , 30 , 0 ,""],
-    [ 180 , 127 , 0 ,""],
-    [ 218 , 28 , 0 ,""],
-    [ 76 , 80 , 0 ,""],
-    [ 187 , 21 , 0 ,""],
-    [ 205 , 122 , 0 ,"red"],
-    [ 52 , 162 , 0 ,""],
-    [ 99 , 122 , 0 ,""],
-    [ 107 , 187 , 0 ,""],
-    [ 148 , 128 , 0 ,""],
-    [ 168 , 171 , 0 ,""],
-    [ 33 , 133 , 0 ,""],
-    [ 78 , 97 , 0 ,""],
-    [ 14 , 77 , 0 ,""],
-    [ 81 , 53 , 0 ,""],
-    [ 7 , 23 , 0 ,""],
-    [ 92 , 37 , 0 ,""],
-    [ 6 , -32 , 0 ,""],
-    [ 216 , -70 , 0 ,""],
-    [ 10 , -98 , 0 ,""],
-    [ 210 , -113 , 0 ,""],
-    [ 137 , -138 , 0 ,""],
-    [ 204 , -147 , 0 ,""],
-    [ 142 , -180 , 0 ,""],
-    [ 197 , -178 , 0 ,""],
-    [ 139 , -160 , 0 ,""],
-    [ 213 , -91 , 0 ,""],
-    [ 7 , -66 , 0 ,""],
-    [ 219 , -27 , 0 ,""],
-    [ 6 , -5 , 0 ,""],
-    [ 221 , 9 , 0 ,""],
-    [ 14 , -131 , 0 ,""],
-    [ 97 , -150 , 0 ,""],
-    [ 22 , -181 , 0 ,""],
-    [ 95 , -181 , 0 ,""],
-    [ 10 , -110 , 0 ,"maroon"],
-    [ -42 , -111 , 0 ,""],
-    [ 9 , -87 , 0 ,""],
-    [ -52 , -82 , 0 ,""],
-    [ 7 , -60 , 0 ,""],
-    [ -54 , -50 , 0 ,""],
-    [ 5 , -38 , 0 ,""],
-    [ -55 , -22 , 0 ,""],
-    [ 6 , 5 , 0 ,""],
-    [ -53 , 15 , 0 ,""],
-    [ 9 , 39 , 0 ,""],
-    [ -40 , 60 , 0 ,""],
-    [ 9 , 76 , 0 ,""]
-  ]
+[ 217 , 116 , 231 ,"lightgray"],
+[ 140 , 21 , 166.7223925040845 ,""],
+[ 117 , 125 , 222.09065168579855 ,""],
+[ 235 , 86 , 278.0455931869225 ,""],
+[ 140 , 21 , 175.8540799064706 ,""],
+[ 76 , 80 , 234.6678810222037 ,""],
+[ 187 , 21 , 205.95145529518106 ,""],
+[ 205 , 122 , 122.62180253158897 ,"red"],
+[ 52 , 162 , 242.47436854723162 ,""],
+[ 99 , 122 , 201.29179696073857 ,""],
+[ 107 , 187 , 193.88976226678415 ,""],
+[ 148 , 128 , 184.92606050743768 ,""],
+[ 168 , 171 , 130.38851126121142 ,""],
+[ 33 , 133 , 258.53055976585495 ,""],
+[ 78 , 97 , 259.3471081910807 ,""],
+[ 14 , 77 , 268.82302289666063 ,""],
+[ 81 , 53 , 271.1799603597051 ,""],
+[ 7 , 23 , 105.71043940624662 ,""],
+[ 92 , 37 , 114.04697147248885 ,""],
+[ 6 , -32 , 284.24207192660174 ,""],
+[ 216 , -70 , 268.741760658569 ,""],
+[ 10 , -98 , 271.72559391499044 ,""],
+[ 210 , -113 , 277.3077112569058 ,""],
+[ 137 , -138 , 275.6269624436203 ,""],
+[ 204 , -147 , 280.1869247883351 ,""],
+[ 142 , -180 , 105.05353290591546 ,""],
+[ 197 , -178 , 82.42055294038005 ,""],
+[ 139 , -160 , 102.87800373463654 ,""],
+[ 213 , -91 , 108.03896680274715 ,""],
+[ 7 , -66 , 91.75209197368298 ,""],
+[ 219 , -27 , 92.2633768498946 ,""],
+[ 6 , -5 , 88.9143323415745 ,""],
+[ 221 , 9 , 108.8986190003971 ,""],
+[ 14 , -131 , 280.58893288125887 ,""],
+[ 97 , -150 , 274.781597477521 ,""],
+[ 22 , -181 , 101.22846949995 ,""],
+[ 95 , -181 , 70.06409552092646 ,""],
+[ 10 , -110 , 160.61494857855314 ,"maroon"],
+[ -42 , -111 , 103.15141488033754 ,""],
+[ 9 , -87 , 100.25761190299863 ,""],
+[ -52 , -82 , 97.88182388564633 ,""],
+[ 7 , -60 , 95.56980371785698 ,""],
+[ -54 , -50 , 91.09331142134289 ,""],
+[ 5 , -38 , 88.28257291968123 ,""],
+[ -55 , -22 , 94.47193183791376 ,""],
+[ 6 , 5 , 97.1277765271006 ,""],
+[ -53 , 15 , 95.77076600856412 ,""],
+[ 9 , 39 , 88.98133465162584 ,""],
+[ -40 , 60 , 87.44242743467436 ,""],
+[ 9 , 76 , 87.44242743467436 ,""],
+]
 
+# Control variables 
 numberOfVisibleWalls = 2
-
+move_increment = 1
+keep_running = 1
+line_index = 0
+boundary_size = 500
 xIdx = 0
 yIdx = 1
 angleIdx = 2
@@ -101,7 +103,7 @@ def breakWall(idx):
   global walls
   
   wall = walls[idx]
-  mason = wall.pop(1)
+  mason = wall[turtleIdx]
   
   # remove intact wall
   mason.clear()
@@ -135,36 +137,107 @@ def drawGrid():
     grid.goto(x,200)
     x += 10
 
-# TODO: draw first numberOfVisibleWalls walls
+# method to draw the bounding box
+def draw_boundaries():
+  boundary_pen = turtle.Turtle()
+  boundary_pen.speed(0)
+  boundary_pen.pensize(5)
+  boundary_pen.penup()
+  # position to upper left corner
+  boundary_pen.goto(-boundary_size/2, boundary_size/2)
+  boundary_pen.pendown()
+  sides_drawn = 0
+  while (sides_drawn < 4):
+    boundary_pen.forward(boundary_size)  
+    boundary_pen.right(90)
+    sides_drawn += 1
+  boundary_pen.hideturtle()
 
-# TODO: set initial game state : starting position, heading, initial color, etc.
+# "bounce" the ball off the obstacle, based on angle of the obstacle
+def change_heading(heading, angle_of_obstacle):
+  return (2 * angle_of_obstacle - heading + 360) % 360
+  # if new_heading > 360:
+  #   new_heading -= 360
+  # if new_heading < 0:
+  #   new_heading = new_heading + 360
+  # return new_heading
+
+#  draw first numberOfVisibleWalls walls
+wallsDrawn = 1
+while (wallsDrawn <  numberOfVisibleWalls + 1):
+  drawWall(wallsDrawn)
+  wallsDrawn += 1
+
+# set initial game state : starting position, heading, initial color, etc.
+wn = turtle.Screen()
+wn.setup(boundary_size + 10,boundary_size + 10)
+# wn.addshape("amongus.png")
+drawSpeed = 0 #int(input("How fast do you want to render the artwork? "))
+
+draw_boundaries()
+traveller = turtle.Turtle(shape="circle")
+traveller.penup()
+traveller.speed(drawSpeed)
+traveller.goto(walls[0][xIdx], walls[0][yIdx])
+traveller.setheading(walls[0][angleIdx])
+traveller.pencolor(walls[0][colorIdx])
+traveller.pendown()
+nextWallIndex = 1
 
 # TODO: run game loop
+while (keep_running == 1):
+  traveller.forward(move_increment)
+  # print(patrick.xcor(), patrick.heading())
+  # have we hit the right side?
+  if (traveller.xcor() >= boundary_size/2):
+    traveller.setheading(change_heading(traveller.heading(), 270))
 
+  # have we hit the left side?
+  if (traveller.xcor() <= -(boundary_size/2)):
+    traveller.setheading(change_heading(traveller.heading(), 270))
 
-# ---- this code just draws lines between the points so I can make get the picture correct.
-needle = turtle.Turtle()
-needle.penup()
-needle.speed(drawSpeed)
+  # have we hit the top side?
+  if (traveller.ycor() >= (boundary_size/2)):
+    traveller.setheading(change_heading(traveller.heading(), 360))
 
-wallIdx = 0
-while wallIdx < len(walls):
-  wall = walls[wallIdx]
+  # have we hit the bottom side?
+  if (traveller.ycor() <= -(boundary_size/2)):
+    traveller.setheading(change_heading(traveller.heading(), 360))
 
-  # I have been using this code block to make calculated adjustments to the coordinates, then copy/pasting the output
-  # to correct the array above. Things like correct positioning on canvas
-  # x = wall[xIdx] + 100
-  # y = wall[yIdx] - 200
-  # print("[",x,",",y,",",wall[angleIdx],",\""+wall[colorIdx]+"\"],")
-  # needle.goto(x, y)
+  wall = walls[nextWallIndex]
+  wallTurtle = wall[turtleIdx]  
+
+  if (int(traveller.distance(wallTurtle.pos())) < 3):
+    print("collision")
+    collideWithWall(nextWallIndex)
+    traveller.setheading(change_heading(traveller.heading(), wall[angleIdx]))
+    if (wall[colorIdx] > ""):
+      traveller.pencolor(wall[colorIdx])
+    nextWallIndex += 1
+
+# # ---- this code just draws lines between the points so I can make get the picture correct.
+# needle = turtle.Turtle()
+# needle.penup()
+# needle.speed(drawSpeed)
+
+# wallIdx = 0
+# while wallIdx < len(walls):
+#   wall = walls[wallIdx]
+
+#   # I have been using this code block to make calculated adjustments to the coordinates, then copy/pasting the output
+#   # to correct the array above. Things like correct positioning on canvas
+#   # x = wall[xIdx] + 100
+#   # y = wall[yIdx] - 200
+#   # print("[",x,",",y,",",wall[angleIdx],",\""+wall[colorIdx]+"\"],")
+#   # needle.goto(x, y)
   
-  needle.goto(wall[xIdx], wall[yIdx])
+#   needle.goto(wall[xIdx], wall[yIdx])
   
-  if wall[colorIdx] != "":
-    needle.pencolor(wall[colorIdx])
+#   if wall[colorIdx] != "":
+#     needle.pencolor(wall[colorIdx])
   
-  needle.pendown()
-  wallIdx += 1
+#   needle.pendown()
+#   wallIdx += 1
 
 # This will draw the imposter on top of the string art
 # imposter = turtle.Turtle()
