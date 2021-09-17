@@ -1,14 +1,12 @@
 import turtle
 
 wn = turtle.Screen()
-wn.setup(500, 400)
 
 # un-comment this line to register the image for use in trinket
 #wn.addshape("amongus.png")
 
 drawSpeed = 0 #int(input("How fast do you want to render the artwork? "))
 
-# TODO: determine angle for each wall to get proper bounce (perpendicular to center of angle)
 walls = [
 [ 217 , 116 , 231 ,"lightgray"],
 [ 140 , 21 , 166.7223925040845 ,""],
@@ -64,7 +62,7 @@ walls = [
 
 # Control variables 
 numberOfVisibleWalls = 2
-move_increment = 1
+move_increment = 2
 keep_running = 1
 line_index = 0
 boundary_size = 500
@@ -88,7 +86,8 @@ def drawWall(idx):
     wall.append(mason)
   else:
     mason = wall[turtleIdx]
-    
+  if (wall[colorIdx] != ""):
+      mason.pencolor(wall[colorIdx])  
   mason.penup()
   mason.goto(wall[xIdx], wall[yIdx])
   mason.setheading(wall[angleIdx])
@@ -121,22 +120,6 @@ def collideWithWall(idx):
   if idx < len(walls) - numberOfVisibleWalls:
     drawWall(idx + numberOfVisibleWalls)
 
-
-def drawGrid():
-  grid = turtle.Turtle()
-  grid.speed(0)
-  
-  x = -200
-  while x < 200:
-    if x == 0:
-      grid.color("blue")
-      
-    grid.penup()
-    grid.goto(x,-200)
-    grid.pendown()
-    grid.goto(x,200)
-    x += 10
-
 # method to draw the bounding box
 def draw_boundaries():
   boundary_pen = turtle.Turtle()
@@ -156,21 +139,17 @@ def draw_boundaries():
 # "bounce" the ball off the obstacle, based on angle of the obstacle
 def change_heading(heading, angle_of_obstacle):
   return (2 * angle_of_obstacle - heading + 360) % 360
-  # if new_heading > 360:
-  #   new_heading -= 360
-  # if new_heading < 0:
-  #   new_heading = new_heading + 360
-  # return new_heading
 
 #  draw first numberOfVisibleWalls walls
-wallsDrawn = 1
-while (wallsDrawn <  numberOfVisibleWalls + 1):
-  drawWall(wallsDrawn)
+wallsDrawn = 0
+while (wallsDrawn <  numberOfVisibleWalls):
   wallsDrawn += 1
+  drawWall(wallsDrawn)
+
 
 # set initial game state : starting position, heading, initial color, etc.
 wn = turtle.Screen()
-wn.setup(boundary_size + 10,boundary_size + 10)
+wn.setup(boundary_size + 100,boundary_size + 100)
 # wn.addshape("amongus.png")
 drawSpeed = 0 #int(input("How fast do you want to render the artwork? "))
 
@@ -185,59 +164,26 @@ traveller.pendown()
 nextWallIndex = 1
 
 # TODO: run game loop
-while (keep_running == 1):
+while (nextWallIndex < len(walls)):
   traveller.forward(move_increment)
-  # print(patrick.xcor(), patrick.heading())
-  # have we hit the right side?
-  if (traveller.xcor() >= boundary_size/2):
-    traveller.setheading(change_heading(traveller.heading(), 270))
-
-  # have we hit the left side?
-  if (traveller.xcor() <= -(boundary_size/2)):
-    traveller.setheading(change_heading(traveller.heading(), 270))
-
-  # have we hit the top side?
-  if (traveller.ycor() >= (boundary_size/2)):
-    traveller.setheading(change_heading(traveller.heading(), 360))
-
-  # have we hit the bottom side?
-  if (traveller.ycor() <= -(boundary_size/2)):
-    traveller.setheading(change_heading(traveller.heading(), 360))
+  # have we hit a side?  This is an error condition
+  if (abs(traveller.xcor()) >= boundary_size/2 or abs(traveller.ycor()) >= boundary_size/2 ):
+    print("Error.  We missed a wall")
+    exit
 
   wall = walls[nextWallIndex]
   wallTurtle = wall[turtleIdx]  
 
   if (int(traveller.distance(wallTurtle.pos())) < 3):
-    print("collision")
     collideWithWall(nextWallIndex)
     traveller.setheading(change_heading(traveller.heading(), wall[angleIdx]))
     if (wall[colorIdx] > ""):
       traveller.pencolor(wall[colorIdx])
+      traveller.color(wall[colorIdx])
     nextWallIndex += 1
 
-# # ---- this code just draws lines between the points so I can make get the picture correct.
-# needle = turtle.Turtle()
-# needle.penup()
-# needle.speed(drawSpeed)
-
-# wallIdx = 0
-# while wallIdx < len(walls):
-#   wall = walls[wallIdx]
-
-#   # I have been using this code block to make calculated adjustments to the coordinates, then copy/pasting the output
-#   # to correct the array above. Things like correct positioning on canvas
-#   # x = wall[xIdx] + 100
-#   # y = wall[yIdx] - 200
-#   # print("[",x,",",y,",",wall[angleIdx],",\""+wall[colorIdx]+"\"],")
-#   # needle.goto(x, y)
-  
-#   needle.goto(wall[xIdx], wall[yIdx])
-  
-#   if wall[colorIdx] != "":
-#     needle.pencolor(wall[colorIdx])
-  
-#   needle.pendown()
-#   wallIdx += 1
+# everything is drawn
+traveller.hideturtle()
 
 # This will draw the imposter on top of the string art
 # imposter = turtle.Turtle()
